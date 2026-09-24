@@ -1066,6 +1066,18 @@ blockquote {
   color: #555;
 }
 
+/* Im Play-Modus bleibt nur der Fortschritt der Folien sichtbar. */
+#presentation.play-mode + #controls button {
+  display: none;
+}
+
+#presentation.play-mode + #controls #counter {
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text);
+  padding: .35rem .7rem;
+}
+
 #progress {
   position: fixed;
   left: 0;

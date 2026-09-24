@@ -80,7 +80,7 @@ function typewrite(item, start, speed = 32) {
 }
 
 const plans = [
-  { duration: 65000, prepare(slide, d) {
+  { duration: 61500, prepare(slide, d) {
     const eyebrow = q(slide, ".eyebrow");
     const theme = q(slide, ".work-theme");
     const meta = q(slide, ".meta");
@@ -89,7 +89,7 @@ const plans = [
     primeTypewriter(typed);
     hide([...eyebrow, ...theme, ...meta, ...items]);
     later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40000);
-    items.forEach((item, index) => later(() => { reveal([item]); typewrite(item, 0); }, 50000 + index * 5000));
+    items.forEach((item, index) => later(() => { reveal([item]); typewrite(item, 0); }, 50000 + index * 1500));
   } },
   { duration: 45000, prepare(slide, d) {
     const list = q(slide, ".agenda-list"), items = q(slide, ".agenda-list p");

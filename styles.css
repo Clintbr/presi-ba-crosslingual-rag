@@ -160,6 +160,8 @@ p {
   gap: 2rem;
   flex-wrap: wrap;
   margin-top: 4rem;
+  text-align: center;
+  justify-content: space-between;
   color: #555;
   font-size: 1rem;
   border-top: 2px solid var(--warm);
@@ -964,6 +966,18 @@ blockquote {
 #presentation.play-mode blockquote,
 #presentation.play-mode .outlook {
   transition: opacity .45s ease, transform .45s ease, visibility .45s ease;
+}
+
+#presentation.play-mode .typewriting::after {
+  content: "|";
+  display: inline-block;
+  margin-left: .08em;
+  color: var(--warm);
+  animation: typing-cursor .65s steps(1) infinite;
+}
+
+@keyframes typing-cursor {
+  50% { opacity: 0; }
 }
 
 .flip-card {

@@ -45,6 +45,10 @@ const clearTimers = () => { timers.forEach(window.clearTimeout); timers = []; };
 const resetReveals = () => {
   document.querySelectorAll(".play-hidden").forEach((item) => item.classList.remove("play-hidden"));
   document.querySelectorAll(".flip-card").forEach((item) => item.classList.remove("play-front", "is-flipped"));
+  document.querySelectorAll("[data-type-text]").forEach((item) => {
+    item.textContent = item.dataset.typeText;
+    item.classList.remove("typewriting");
+  });
 };
 const sequence = (items, start, interval, duration, tail = 0) => {
   const step = items.length < 2 ? interval : Math.min(interval, Math.max(0, (duration - tail - start) / (items.length - 1)));
@@ -61,8 +65,32 @@ function metrics(slide, metricSelector, rowSelector, duration) {
   const note = q(slide, ".bottom-note"); hide(note); later(() => reveal(note), duration - 20000);
 }
 
+function primeTypewriter(items) {
+  items.forEach((item) => {
+    item.dataset.typeText ??= item.textContent;
+    item.textContent = "";
+    item.classList.add("typewriting");
+  });
+}
+
+function typewrite(item, start, speed = 32) {
+  const text = item.dataset.typeText;
+  [...text].forEach((character, index) => later(() => { item.textContent += character; }, start + index * speed));
+  later(() => item.classList.remove("typewriting"), start + text.length * speed);
+}
+
 const plans = [
-  { duration: 30000 },
+  { duration: 65000, prepare(slide, d) {
+    const eyebrow = q(slide, ".eyebrow");
+    const theme = q(slide, ".work-theme");
+    const meta = q(slide, ".meta");
+    const items = q(slide, ".meta span");
+    const typed = [...eyebrow, ...theme, ...items];
+    primeTypewriter(typed);
+    hide([...eyebrow, ...theme, ...meta, ...items]);
+    later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40000);
+    items.forEach((item, index) => later(() => { reveal([item]); typewrite(item, 0); }, 50000 + index * 5000));
+  } },
   { duration: 50000, prepare(slide, d) {
     const list = q(slide, ".agenda-list"), items = q(slide, ".agenda-list p");
     hide([...list, ...items]); later(() => reveal(list), 15000); sequence(items, 15000, 5000, d, 5000);
@@ -95,7 +123,7 @@ const plans = [
     cards.forEach((card, i) => later(() => card.classList.add("is-flipped"), 10000 + i * 35000));
   } },
   { duration: 60000, prepare(slide) { const outlook = q(slide, ".outlook"); hide(outlook); later(() => reveal(outlook), 10000); } },
-  { duration: 40000 },
+  { duration: 10000 },
 ];
 
 function showSlide(index, auto = false) {

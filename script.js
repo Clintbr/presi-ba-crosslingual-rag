@@ -6,17 +6,19 @@ const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 const play = document.getElementById("play");
 const fullscreen = document.getElementById("fullscreen");
-const pentagonAnchors = [[70,12],[84,10],[79,74],[10,76],[78,18],[88,64],[5,28],[85,46],[68,82]];
+const pentagonAnchors = [[70,12],[84,10],[79,74],[10,76],[78,18],[88,64],[5,28],[85,46],[68,82],[22,13],[47,88],[94,36]];
+const pentagonSizes = ["clamp(44px, 4vw, 66px)", "clamp(58px, 5vw, 84px)", "clamp(76px, 7vw, 112px)", "clamp(96px, 9vw, 142px)", "clamp(120px, 11vw, 178px)"];
 
 slides.forEach((slide, slideIndex) => {
   const background = document.createElement("div");
   background.className = "pentagon-background";
   background.setAttribute("aria-hidden", "true");
-  for (let item = 0; item < 3; item += 1) {
+  for (let item = 0; item < 7; item += 1) {
     const [left, top] = pentagonAnchors[(slideIndex * 2 + item * 3) % pentagonAnchors.length];
     const pentagon = document.createElement("i");
     pentagon.style.setProperty("--left", `${left}%`);
     pentagon.style.setProperty("--top", `${top}%`);
+    pentagon.style.setProperty("--size", pentagonSizes[(slideIndex + item * 2) % pentagonSizes.length]);
     pentagon.style.setProperty("--rotation", `${(slideIndex * 29 + item * 37) % 90 - 45}deg`);
     background.append(pentagon);
   }
@@ -90,7 +92,7 @@ function typewriteSlideHeading(slide) {
 }
 
 const plans = [
-  { duration: 60000, prepare(slide, d) {
+  { duration: 61000, prepare(slide, d) {
     const eyebrow = q(slide, ".eyebrow");
     const theme = q(slide, ".work-theme");
     const meta = q(slide, ".meta");

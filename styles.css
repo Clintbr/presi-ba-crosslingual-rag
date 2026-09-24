@@ -51,7 +51,7 @@ body {
   position: absolute;
   left: var(--left);
   top: var(--top);
-  width: clamp(70px, 8vw, 115px);
+  width: var(--size, clamp(70px, 8vw, 115px));
   aspect-ratio: 1;
   background: rgba(239, 157, 106, .34);
   clip-path: polygon(50% 0, 100% 36%, 81% 100%, 19% 100%, 0 36%);

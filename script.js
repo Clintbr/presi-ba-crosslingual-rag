@@ -79,8 +79,18 @@ function typewrite(item, start, speed = 32) {
   later(() => item.classList.remove("typewriting"), start + text.length * speed);
 }
 
+function typewriteSlideHeading(slide) {
+  const items = q(slide, ".kicker, h2");
+  primeTypewriter(items);
+  let start = 0;
+  items.forEach((item) => {
+    typewrite(item, start);
+    start += [...item.dataset.typeText].length * 32 + 250;
+  });
+}
+
 const plans = [
-  { duration: 61500, prepare(slide, d) {
+  { duration: 60000, prepare(slide, d) {
     const eyebrow = q(slide, ".eyebrow");
     const theme = q(slide, ".work-theme");
     const meta = q(slide, ".meta");
@@ -89,7 +99,9 @@ const plans = [
     primeTypewriter(typed);
     hide([...eyebrow, ...theme, ...meta, ...items]);
     later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40000);
-    items.forEach((item, index) => later(() => { reveal([item]); typewrite(item, 0); }, 50000 + index * 1500));
+    items.forEach((item, index) => { if (index < 2) later(() => { reveal([item]); typewrite(item, 0); }, 51500 + index * 5000)
+      else later(() => { reveal([item]); typewrite(item, 0); }, 58000)
+    });
   } },
   { duration: 45000, prepare(slide, d) {
     const list = q(slide, ".agenda-list"), items = q(slide, ".agenda-list p");
@@ -139,6 +151,7 @@ function showSlide(index, auto = false) {
 function preparePlaySlide() {
   clearTimers(); resetReveals();
   const plan = plans[current] ?? { duration: 30000 };
+  if (current !== 0) typewriteSlideHeading(slides[current]);
   plan.prepare?.(slides[current], plan.duration);
   later(() => {
     if (!playing) return;

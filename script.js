@@ -105,9 +105,9 @@ const plans = [
       else later(() => { reveal([item]); typewrite(item, 0); }, 58000)
     });
   } },
-  { duration: 45000, prepare(slide, d) {
+  { duration: 43000, prepare(slide, d) {
     const list = q(slide, ".agenda-list"), items = q(slide, ".agenda-list p");
-    hide([...list, ...items]); later(() => reveal(list), 10000); sequence(items, 10000, 5000, d, 5000);
+    hide([...list, ...items]); later(() => reveal(list), 10000); sequence(items, 10000, 5000, d, 3000);
   } },
   { duration: 225000, prepare(slide) {
     const cards = q(slide, ".lang-card"), arrows = q(slide, ".language-flow .arrow"), panels = q(slide, ".research-comparison > div"), ref = q(slide, ".research-comparison > div:first-child li"), own = q(slide, ".research-comparison > div:last-child li");

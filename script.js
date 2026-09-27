@@ -125,9 +125,9 @@ const plans = [
   { duration: 120000, prepare(slide, d) { const items = q(slide, ".method-box"); hide(items); sequence(items, 15000, 35000, d, 35000); } },
   { duration: 155000, prepare(slide, d) { const items = q(slide, ".method-box"); hide(items); sequence(items, 15000, 35000, d, 35000); } },
   { duration: 175000, prepare(slide, d) { const items = q(slide, ".method-box"); hide(items); sequence(items, 15000, 40000, d, 40000); } },
-  { duration: 135000, prepare(slide) {
+  { duration: 115000, prepare(slide) {
     const table = q(slide, ".result-table"), head = q(slide, ".result-table .row.head"), rows = q(slide, ".result-table .row:not(.head)"); hide([...table, ...head, ...rows]);
-    later(() => reveal([table[0], head[0], rows[0]]), 15000); rows.slice(1).forEach((row, i) => later(() => reveal([row]), 45000 + i * 30000));
+    later(() => reveal([table[0], head[0], rows[0]]), 15000); rows.slice(1).forEach((row, i) => later(() => reveal([row]), 40000 + i * 25000));
   } },
   { duration: 155000, prepare(slide, d) { metrics(slide, ".runtime-metric", ".runtime-row", d); } },
   { duration: 155000, prepare(slide, d) { metrics(slide, ".resource-metric", ".resource-row", d); } },

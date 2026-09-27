@@ -60,9 +60,9 @@ const sequence = (items, start, interval, duration, tail = 0) => {
 function metrics(slide, metricSelector, rowSelector, duration) {
   const cards = q(slide, metricSelector); hide(cards); hide(q(slide, rowSelector));
   cards.forEach((card, index) => {
-    const start = 15000 + index * 30000;
+    const start = 10000 + index * 25000;
     later(() => reveal([card]), start);
-    q(card, rowSelector).forEach((row, rowIndex) => later(() => reveal([row]), start + rowIndex * 7500));
+    q(card, rowSelector).forEach((row, rowIndex) => later(() => reveal([row]), start + rowIndex * 5000));
   });
   const note = q(slide, ".bottom-note"); hide(note); later(() => reveal(note), duration - 20000);
 }
@@ -125,19 +125,19 @@ const plans = [
   { duration: 120000, prepare(slide, d) { const items = q(slide, ".method-box"); hide(items); sequence(items, 15000, 35000, d, 35000); } },
   { duration: 155000, prepare(slide, d) { const items = q(slide, ".method-box"); hide(items); sequence(items, 15000, 35000, d, 35000); } },
   { duration: 175000, prepare(slide, d) { const items = q(slide, ".method-box"); hide(items); sequence(items, 15000, 40000, d, 40000); } },
-  { duration: 115000, prepare(slide) {
+  { duration: 90000, prepare(slide) {
     const table = q(slide, ".result-table"), head = q(slide, ".result-table .row.head"), rows = q(slide, ".result-table .row:not(.head)"); hide([...table, ...head, ...rows]);
-    later(() => reveal([table[0], head[0], rows[0]]), 15000); rows.slice(1).forEach((row, i) => later(() => reveal([row]), 40000 + i * 25000));
+    later(() => reveal([table[0], head[0], rows[0]]), 10000); rows.slice(1).forEach((row, i) => later(() => reveal([row]), 30000 + i * 20000));
   } },
-  { duration: 155000, prepare(slide, d) { metrics(slide, ".runtime-metric", ".runtime-row", d); } },
-  { duration: 155000, prepare(slide, d) { metrics(slide, ".resource-metric", ".resource-row", d); } },
+  { duration: 110000, prepare(slide, d) { metrics(slide, ".runtime-metric", ".runtime-row", d); } },
+  { duration: 110000, prepare(slide, d) { metrics(slide, ".resource-metric", ".resource-row", d); } },
   { duration: 120000, prepare(slide) { const items = q(slide, ".conclusion p"); hide(items); items.forEach((item, i) => later(() => reveal([item]), 10000 + i * 55000)); } },
   { duration: 150000, prepare(slide) {
     const cards = q(slide, ".flip-card"); hide(cards); later(() => { reveal(cards); cards.forEach((card) => card.classList.add("play-front")); }, 5000);
     cards.forEach((card, i) => later(() => card.classList.add("is-flipped"), 10000 + i * 35000));
   } },
-  { duration: 60000, prepare(slide) { const outlook = q(slide, ".outlook"); hide(outlook); later(() => reveal(outlook), 10000); } },
-  { duration: 10000 },
+  { duration: 90000, prepare(slide) { const outlook = q(slide, ".outlook"); hide(outlook); later(() => reveal(outlook), 10000); } },
+  { duration: 40000 },
 ];
 
 function showSlide(index, auto = false) {

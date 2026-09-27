@@ -1089,6 +1089,10 @@ blockquote {
   transition: width .2s ease;
 }
 
+.question blockquote {
+  margin-bottom: 100px;
+}
+
 @media (max-width: 900px) {
   .strategy-grid, .metric-grid, .resource-grid, .limits {
     grid-template-columns: repeat(2, 1fr);

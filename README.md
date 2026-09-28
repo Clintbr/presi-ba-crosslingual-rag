@@ -15,7 +15,7 @@ Implementierung, Analyse und Vergleich von crosslingualen RAG-Strategien im Kont
 4. Mit `F`, Doppelklick oder dem Vollbild-Button den Vollbildmodus starten.
 
 ## Konzept
-Die Präsentation folgt einer 12-Folien-Argumentationslinie:
-Titel → Agenda → Relevanz → Forschungsfrage → Methode → drei Ergebnisfolien → Fazit → kritische Würdigung → Ausblick → Quellen.
+Die Präsentation folgt einer 15-Folien-Argumentationslinie:
+Titel → Agenda → Relevanz → Forschungsfrage → vier Methodenfolien → drei Ergebnisfolien → Fazit → kritische Würdigung → Ausblick → Quellen.
 
-Die Inhalte des Entwurfs basieren auf dem bereitgestellten ersten Teil der Bachelorarbeit und dem Präsentationsleitfaden der FU Berlin.
+Die Inhalte des Entwurfs basieren auf dem Präsentationsleitfaden der FU Berlin.

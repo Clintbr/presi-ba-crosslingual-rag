@@ -100,8 +100,8 @@ const plans = [
     const typed = [...eyebrow, ...theme, ...items];
     primeTypewriter(typed);
     hide([...eyebrow, ...theme, ...meta, ...items]);
-    later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40000);
-    items.forEach((item, index) => { if (index < 2) later(() => { reveal([item]); typewrite(item, 0); }, 51500 + index * 5000)
+    later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40500);
+    items.forEach((item, index) => { if (index < 2) later(() => { reveal([item]); typewrite(item, 0); }, 51000 + index * 5000)
       else later(() => { reveal([item]); typewrite(item, 0); }, 58000)
     });
   } },
@@ -109,11 +109,16 @@ const plans = [
     const list = q(slide, ".agenda-list"), items = q(slide, ".agenda-list p");
     hide([...list, ...items]); later(() => reveal(list), 10000); sequence(items, 10000, 5000, d, 3000);
   } },
-  { duration: 225000, prepare(slide) {
-    const cards = q(slide, ".lang-card"), arrows = q(slide, ".language-flow .arrow"), panels = q(slide, ".research-comparison > div"), ref = q(slide, ".research-comparison > div:first-child li"), own = q(slide, ".research-comparison > div:last-child li");
-    hide([...cards, ...arrows, ...panels, ...ref, ...own]);
-    cards.forEach((card, i) => later(() => { reveal([card]); if (i) reveal([arrows[i - 1]]); }, 45000 + i * 35000));
-    ref.forEach((item, i) => later(() => { if (i === 0) reveal(panels); reveal([item, own[i]]); }, 150000 + i * 15000));
+  { duration: 250000, prepare(slide) {
+    const cards = q(slide, ".lang-card"), citations = q(slide, ".lang-card .citation"), arrows = q(slide, ".language-flow .arrow"), panels = q(slide, ".research-comparison > div"), ref = q(slide, ".research-comparison > div:first-child li"), own = q(slide, ".research-comparison > div:last-child li");
+    primeTypewriter(citations);
+    hide([...cards, ...citations, ...arrows, ...panels, ...ref, ...own]);
+    cards.forEach((card, i) => {
+      const cardStart = 45000 + i * 35000;
+      later(() => { reveal([card]); if (i) reveal([arrows[i - 1]]); }, cardStart);
+      later(() => { reveal([citations[i]]); typewrite(citations[i], 0, 18); }, cardStart + 5000);
+    });
+    ref.forEach((item, i) => later(() => { if (i === 0) reveal(panels); reveal([item, own[i]]); }, 150000 + i * 20000));
   } },
   { duration: 200000, prepare(slide, d) {
     const question = q(slide, "blockquote"), panels = q(slide, ".question-details > div"), hypotheses = q(slide, ".question-details > div:first-child li"), limits = q(slide, ".question-details > div:last-child li");

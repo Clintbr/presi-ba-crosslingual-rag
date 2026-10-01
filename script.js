@@ -100,7 +100,7 @@ const plans = [
     const typed = [...eyebrow, ...theme, ...items];
     primeTypewriter(typed);
     hide([...eyebrow, ...theme, ...meta, ...items]);
-    later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40500);
+    later(() => { reveal([...eyebrow, ...theme, ...meta]); typewrite(eyebrow[0], 0); typewrite(theme[0], 0); }, 40000);
     items.forEach((item, index) => { if (index < 2) later(() => { reveal([item]); typewrite(item, 0); }, 51000 + index * 5000)
       else later(() => { reveal([item]); typewrite(item, 0); }, 58000)
     });
